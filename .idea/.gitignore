@@ -8,3 +8,8 @@
 /dataSources.local.xml
 # Zeppelin 忽略的文件
 /ZeppelinRemoteNotebooks/
+# IDEA 忽略的文件
+.idea/
+__pycache__/
+*.pyc
+*.pyo
