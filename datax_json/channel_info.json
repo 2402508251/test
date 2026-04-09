@@ -1,0 +1,79 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 3
+      },
+      "errorLimit": {
+        "record": 0,
+        "percentage": 0.02
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "123456",
+            "connection": [
+              {
+                "querySql": [
+                  "select id,name,channel_code,channel_type,channel_cus_fee,channel_perf_fee,updated_at,created_at from channel_info"
+                ],
+                "jdbcUrl": [
+                  "jdbc:mysql://node1:3306/jrxd"
+                ]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "defaultFS": "hdfs://node1:9820",
+            "fileType": "text",
+            "path": "/user/hive-4.0.1/warehouse/finance.db/ods_jrxd_channel_info",
+            "fileName": "channel_info",
+            "writeMode": "append",
+            "column": [
+              {
+                "name": "id",
+                "type": "bigint"
+              },
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "channel_code",
+                "type": "string"
+              },
+              {
+                "name": "channel_type",
+                "type": "string"
+              },
+              {
+                "name": "channel_cus_fee",
+                "type": "string"
+              },
+              {
+                "name": "channel_perf_fee",
+                "type": "string"
+              },
+              {
+                "name": "updated_at",
+                "type": "string"
+              },
+              {
+                "name": "created_at",
+                "type": "string"
+              }
+            ],
+            "fieldDelimiter": ","
+          }
+        }
+      }
+    ]
+  }
+}
